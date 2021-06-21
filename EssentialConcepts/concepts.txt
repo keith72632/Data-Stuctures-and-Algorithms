@@ -1,0 +1,11 @@
+Essential Concepts
+Arrays:
+    Collection of similar data types. Start at a point in memory and ever element is sequential.     
+Cannot initialize variable sized arrays. 
+
+Stuctures:
+    Collection of data members under one name. Userdefined data types. Structures do not take up any 
+memory until intialized. 
+
+Complex Numbers:
+    Can be expressed in the form a + bi, where a and b are real number, and i is a symbol called the imaginary unit. 
