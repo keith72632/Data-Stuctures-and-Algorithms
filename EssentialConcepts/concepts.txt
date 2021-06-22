@@ -9,3 +9,17 @@ memory until intialized.
 
 Complex Numbers:
     Can be expressed in the form a + bi, where a and b are real number, and i is a symbol called the imaginary unit. 
+
+Pointers:
+    A pointer is an address variable. Main memory is divided into three sections: code, stack and heap. Program 
+can directly access code and stack. Heap is external to program. One of the uses of pointers is to acces the
+heap. Declared with *. Ex: int *p;. You can then assign a different value located in varible by usuing: p = &variable. 
+Pointer is then derefernced usign *. 
+    Malloc will allocate memory for pointer to heap. Allot memory in malloc in terms of bytes. Fastest way is to 
+use sizeof(dataType) * how many members you want. Malloc returns void pointer, so needs to be cast. (int *)malloc(SIZE);.
+Cpp syntax p = new p[5];. To free pointer in C use free(pointer). In CPP use delete [] pointer;
+
+References (CPP):
+    Varaible will be added to stack frame. Create variable for reference by usign &. Example: 
+Int a = 10; int &r = a; Incrementing r will increase the VALUE to a. The use of this is to pass 
+reference to function. 
