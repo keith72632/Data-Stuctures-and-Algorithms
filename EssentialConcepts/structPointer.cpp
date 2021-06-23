@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 
 struct Rectangle
 {
@@ -15,6 +16,7 @@ int main()
     double *p4;
     struct Rectangle *p5;
 
+    p5 = (struct Rectangle*)malloc(sizeof(struct Rectangle));
     p5 = new Rectangle{10, 4};
 
     //every pointer will be 8 bytes(32 bits) in size
@@ -26,5 +28,6 @@ int main()
     cout << p5->length << endl;
     cout << p5->width << endl;
 
+    free(p5);
     return 0;
 }

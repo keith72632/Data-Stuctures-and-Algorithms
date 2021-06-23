@@ -23,3 +23,18 @@ References (CPP):
     Varaible will be added to stack frame. Create variable for reference by usign &. Example: 
 Int a = 10; int &r = a; Incrementing r will increase the VALUE to a. The use of this is to pass 
 reference to function. 
+
+Functions:
+    Where grouping data is a structure, grouping instructions is a function. Function programming is 
+called Modular or Procedural programming. Monolithic programming is where all instructions are in 
+main() without any functions. C passes parameters by value, where as CPP passes by reference. Passing
+by value copies value into function. If passing structure as argument, use pointer. 
+
+Passing Methods:
+    Call by Value: Values inside function do not change global or caller variables. 
+    Call by Reference: Values are changed outside of scope of function
+
+Converting C to CPP code:
+    When switching from structs to classes, no need to pass structure or class as argument. In class
+hide data in private, use functions in public. Only functions should be allowed to access data. Initializations
+in cpp are constructors. Constructures have the same name as Class 
