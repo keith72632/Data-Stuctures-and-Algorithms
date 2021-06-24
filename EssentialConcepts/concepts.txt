@@ -38,3 +38,12 @@ Converting C to CPP code:
     When switching from structs to classes, no need to pass structure or class as argument. In class
 hide data in private, use functions in public. Only functions should be allowed to access data. Initializations
 in cpp are constructors. Constructures have the same name as Class 
+
+Constructors:
+    Used to initalize data within a class. Syntax is: ClassName(args); ClassName::ClassName(args){};
+A deconstructor deallocated memory within class. syntax is ~ClassName(); ClassName::~ClassName(){};
+
+Templates:
+    Generic classes can use any type of data. template<class T>, then change data types to T. Write <T>::
+if using scope operator. when using scope operatora to describe functions, using return type of T IF function
+returns. When declaring class name, use ClassName<datatype> name; Ex. Rectangle<int> r;. 
