@@ -4,4 +4,7 @@ in stack, Linked Lists and dynamic memory are stored in heap. Linked Lists are c
 element in heap, which also has a pointer that points to the next element. 
 
 Creating Linked List:
-    Linked lists are a collection of nodes, where each node contains data and pointer to next node. First node is called Head. 
+    Linked lists are a collection of nodes, where each node contains data and pointer to next node. First node is called Head. Use
+another pointer variable for the first as to not "corrupt" the head. So if *first is the first node in LL, then assign a vraible to
+it. struct Node *first = NULL, *p = NULL; first = (struct Node *)malloc(sizeof(struct Node)); p = first;
+
