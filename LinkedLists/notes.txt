@@ -1,0 +1,7 @@
+Why use linked lists?
+    Arrays are fixed in size, which is a problem when using dynamic memory. Linked Lists alleviate this problem. Arrays are declared
+in stack, Linked Lists and dynamic memory are stored in heap. Linked Lists are composed of an intial pointer, which points to an
+element in heap, which also has a pointer that points to the next element. 
+
+Creating Linked List:
+    Linked lists are a collection of nodes, where each node contains data and pointer to next node. First node is called Head. 
