@@ -1,0 +1,3 @@
+Steps to solving problems with recursion
+1. Divide into smaller problems
+2. Specify base condition to stop recursive function

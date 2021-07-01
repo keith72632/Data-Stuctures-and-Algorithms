@@ -5,16 +5,20 @@ struct Node
 {
 	int data;
 	struct Node *next;
-}*first;
+};
 
-void create(int Arr[], int len)
+struct Node *first;
+struct Node *second;
+struct Node *third;
+
+void create(struct Node *ptr, int Arr[], int len)
 {
 	int i;
 	struct Node *last, *temp;
-	first = (struct Node *)malloc(sizeof(struct Node));
-	first->data = Arr[0];
-	first->next = NULL;
-	last = first;
+	//ptr = (struct Node *)malloc(sizeof(struct Node));
+	ptr->data = Arr[0];
+	ptr->next = NULL;
+	last = ptr;
 	
 	for(i = 1; i < len; i++)
 	{
@@ -55,21 +59,112 @@ int count_nodes_r(struct Node *p)
 	else return count_nodes_r(p->next) + 1;
 }
 
+int sum_nodes(struct Node *p)
+{
+	if(p == NULL) return 0;
+
+	else return sum_nodes(p->next) + p->data;
+}
+
+int max_data(struct Node *p)
+{
+	int m;
+	while(p)
+	{
+		if(p->data > m)
+			m = p->data;
+		p = p->next;
+	}
+	return m;
+}
+
+//recursive
+int max(struct Node *p)
+{
+	int x = 0;
+	if(p == NULL)
+		return INT_MIN;
+	else
+	{
+		x = max(p->next);
+		//if next data is greater than current
+		if(x > p->data)
+			return x;
+		else
+			return p->data;
+	}
+
+}
+
+void find(struct Node *p, int n)
+{
+	while(p != NULL)
+	{
+		int x = 1;
+		if(p->data == n)
+		{
+			printf("Value found at node: %d\n", x);
+			break;
+		}
+		else
+		{
+			p = p->next;
+			x++;
+		}
+	}
+}
+
 int main()
 {
 	int A[] = {1, 2, 3, 4};
+	int B[] = {5, 5, 6, 6};
+	int C[] = {11, 5, 3, 1};
 	
-	create(A, 4);
+	//must be allocated inside function, or will throw error
+	first = (struct Node *)malloc(sizeof(struct Node));
+	second = (struct Node *)malloc(sizeof(struct Node));
+	third = (struct Node *)malloc(sizeof(struct Node));
+
+
+	create(first, A, 4);
+	create(second, B, 4);
+	create(third, C, 4);
 	
 	display(first);
+	display(second);
+	display(third);
 
-	int num_nodes = count_nodes_r(first);
+	// int num_nodes_first = count_nodes_r(first);
+	// int num_nodes_second = count_nodes_r(second);
+	// int num_nodes_third = count_nodes_r(third);
 
-	printf("Number of nodes using recursion %d\n", num_nodes);
+	// printf("Number of nodes in first using recursion %d\n", num_nodes_first);
+	// printf("Number of nodes in second using recursion %d\n", num_nodes_second);
+	// printf("Number of nodes in third using recursion %d\n", num_nodes_third);
 
-	num_nodes = count_nodes(first);
+	// num_nodes_first = count_nodes(first);
+	// num_nodes_second = count_nodes(second);
+	// num_nodes_third = count_nodes(third);
 
-	printf("Number of nodes without using Recursion %d\n", num_nodes);
+	// printf("Number of nodes in first without using Recursion %d\n", num_nodes_first);
+	// printf("Number of nodes in second without using Recursion %d\n", num_nodes_second);
+	// printf("Number of nodes in third without using Recursion %d\n", num_nodes_third);
 
+	// int sum_first = sum_nodes(first);
+	// int sum_second = sum_nodes(second);
+	// int sum_third = sum_nodes(third);
+
+	// printf("Sum of nodes: %d\n", sum_first);
+	// printf("Sum of nodes: %d\n", sum_second);
+	// printf("Sum of nodes: %d\n", sum_third);
+
+	// int max_first = max(first);
+	// int max_second = max(second);
+	// int max_third = max(third);
+	// printf("Max element in first: %d\n", max_first);
+	// printf("Max element in second: %d\n", max_second);
+	// printf("Max element in third: %d\n", max_third);
+
+	find(third, 1);
 	return 0;
 }
