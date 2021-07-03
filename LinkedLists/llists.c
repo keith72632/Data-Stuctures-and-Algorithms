@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
+// linked list consists of at least two parts, the data stored in the node and a pointer pointing to the next
 struct Node 
 {
 	int data;
@@ -88,11 +90,10 @@ int max(struct Node *p)
 	{
 		x = max(p->next);
 		//if next data is greater than current
-		if(x > p->data)
-			return x;
-		else
-			return p->data;
+		if(p->data > x)
+			x = p->data;
 	}
+    return x;
 
 }
 
@@ -158,13 +159,15 @@ int main()
 	// printf("Sum of nodes: %d\n", sum_second);
 	// printf("Sum of nodes: %d\n", sum_third);
 
-	// int max_first = max(first);
-	// int max_second = max(second);
-	// int max_third = max(third);
-	// printf("Max element in first: %d\n", max_first);
-	// printf("Max element in second: %d\n", max_second);
-	// printf("Max element in third: %d\n", max_third);
+	int max_first = max(first);
+	int max_second = max(second);
+	int max_third = max(third);
+	printf("Max element in first: %d\n", max_first);
+	printf("Max element in second: %d\n", max_second);
+	printf("Max element in third: %d\n", max_third);
 
 	find(third, 1);
+    find(first, 2);
+    find(second, 6);
 	return 0;
 }
