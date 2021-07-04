@@ -145,32 +145,29 @@ int count(struct Node *p)
     return c;
 }
 
-void insert(struct Node *p, int data, int pos)
+void insert(struct Node *p, int pos, int data)
 {
     struct Node *temp;
-    if(pos < 1 || pos > count(p))
-    {
-        printf("incorrect postion");
-        return;
-    }
-    
     temp = (struct Node *)malloc(sizeof(struct Node));
-    t->data = data;
+    printf("one");
 
+    temp->data = data;
+    printf("two");
     if(pos == 0)
-    {
         temp->next = p;
-        p = temp;
-    }
-    else 
+    else
     {
         for(int i = 0; i < pos - 1; i++)
         {
+            printf("three");
             p = p->next;
         }
-        temp->next = p->next;
-        p->next = temp;
+        printf("Four");
+        temp = p;
+        temp->next = p;
+        printf("five");
     }
+    printf("Six");
 }
 
 int main()
@@ -190,9 +187,10 @@ int main()
     create(a, A, lenA);
     create(b, B, lenB);
     create(c, C, lenC);
-    display(a);
-    display(b);
-    display(c);
+    //display(a);
+    //display(b);
+    printf("Here");
+    //display(c);
     /*
     int fac = rfact(a);
     int sumN = rSum(a);
@@ -215,6 +213,7 @@ int main()
     printf("Number of nodes: %d\n",numNodes);
     */
 
+    printf("here");
     insert(a, 66, 2);
     display(a);
 }

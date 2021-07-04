@@ -5,7 +5,9 @@ struct Node
 {
     int data;
     struct Node *next;
-}*first;
+};
+
+struct Node *first;
 
 void create(int arr[], int len)
 {
@@ -34,7 +36,7 @@ void display(struct Node *p)
     }
 }
 
-void insert(struct Node *p, int x)
+void insert(struct Node *p, struct Node **ptr, int x)
 {
     struct Node *t, *q = NULL;
 
@@ -42,8 +44,8 @@ void insert(struct Node *p, int x)
     t->data = x;
     t->next = NULL;
 
-    if(first == NULL)
-        first = t;
+    if(*ptr == NULL)
+        *ptr = t;
     else
     {
         while(p && p->data < x)
@@ -68,8 +70,10 @@ int main()
 {
     int A[] = {1, 2, 3, 4};
     create(A, 4);
-    insert(first, 10);
-    insert(first, 7);
+    insert(first, &first, 10);
+    insert(first, &first, 6);
+    insert(first, &first, 11);
+    insert(first, &first,  7);
     display(first); 
     return 0;
 }
