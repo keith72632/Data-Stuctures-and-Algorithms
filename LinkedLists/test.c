@@ -110,6 +110,100 @@ void insert_sorted(struct Node **ptr, int data)
     }
 }
 
+//Delete by index
+int delete(struct Node **ptr, int index)
+{
+    struct Node *q;
+    int x = -1;
+
+    if(index < 1 || index > count(*ptr)) return -1 ;
+
+    //first node
+    if(index == 1)
+    {
+        q = *ptr;
+        *ptr = (*ptr)->next;
+        x = (*ptr)->data;
+        free(q);
+        return x; 
+    }
+    else
+    {
+        for(size_t i = 0; i < index - 1; i++)
+        {
+            q = *ptr;
+            *ptr = (*ptr)->next;
+        }
+        q->next = (*ptr)->next;
+        x = (*ptr)->data;
+        free(q);
+        return x; 
+    }
+}
+
+int deleteIndex(struct Node **head_ref, int index)
+{
+    struct Node *temp = *head_ref;
+    struct Node *prev = NULL;
+
+    if(index < 1 || index > count(temp)) return -1;
+
+    if(index == 1)
+    {
+        *head_ref = temp->next;
+        free(temp);
+        return (*head_ref)->data;
+    }
+    else
+    {
+        for(size_t i = 0; i < index - 1; i++)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+        prev->next = temp->next;
+
+        free(temp);
+        return (*head_ref)->data;
+
+    }
+}
+
+//Find node by key and delete
+void deleteNode(struct Node **head_ref, int key)
+{
+    struct Node *temp = *head_ref;
+    struct Node *prev = NULL;
+
+    //if node itself holds key to be deleted
+    if(temp != NULL && temp->data == key)
+    {
+        *head_ref = temp->next; // changed head
+        free(temp);             // free old head
+        return;
+    }
+    //else seach for key to be deleted, keep track of the previous node as need
+    //to change prev->next;
+    else
+    {
+        while(temp != NULL && temp->data != key)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        if(temp == NULL)
+            return;
+
+        //Unlink node from list
+        prev->next = temp->next;
+
+        free(temp);
+
+    }
+
+}
+
 int main()
 {
     int A[] = {1, 2, 3, 4};
@@ -127,6 +221,13 @@ int main()
     // insert_index(&first, 0, 69);
     insert_sorted(&first, 5);
     insert_sorted(&first, 5);
+    display(first);
+
+    // int del = delete(&first, 7);
+    // printf("Delete Status = %d\n", del);
+    // deleteNode(&first, 1);
+    int del = deleteIndex(&first, 2);
+    printf("Delete status = %d\n", del);
     display(first);
     return 0;
 }

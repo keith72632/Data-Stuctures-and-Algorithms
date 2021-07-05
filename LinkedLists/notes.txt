@@ -17,3 +17,7 @@ pass the first node as an argument to the function, and inside the function, cal
 Searching in a Linked List
     Must traverse a linked list from the beginning. Linear search checks one by one, and binary search checks every
 second. Bianry only works on sorted lists, or in other words, doesnt work on Linked Lists. 
+
+Deleting Node
+	Free node. Delete first node-> Assign first node a temp. Move first node to next. 
+delete temp. 
