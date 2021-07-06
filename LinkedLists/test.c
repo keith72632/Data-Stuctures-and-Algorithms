@@ -8,14 +8,15 @@ struct Node
 };
 
 struct Node *first;
+struct Node *head;
 
-void create(int arr[], int len)
+void create(struct Node **head_ref, int arr[], int len)
 {
     struct Node *temp, *last;
-    first = (struct Node*)malloc(sizeof(struct Node));
-    first->data = arr[0];
-    first->next = NULL;
-    last = first;
+    *head_ref = (struct Node*)malloc(sizeof(struct Node));
+    (*head_ref)->data = arr[0];
+    (*head_ref)->next = NULL;
+    last = *head_ref;
     
     for(int i = 1; i < len; i++)
     {
@@ -170,7 +171,7 @@ int deleteIndex(struct Node **head_ref, int index)
 }
 
 //Find node by key and delete
-void deleteNode(struct Node **head_ref, int key)
+void deleteKey(struct Node **head_ref, int key)
 {
     struct Node *temp = *head_ref;
     struct Node *prev = NULL;
@@ -204,30 +205,97 @@ void deleteNode(struct Node **head_ref, int key)
 
 }
 
-int main()
+void remove_list_entry(struct Node **head_ref, int key)
+{
+    struct Node *prev, *walk;
+    walk = *head_ref;
+
+    if(walk != NULL && walk->data == key)
+    {
+        *head_ref = walk->next;
+        return;
+    }
+
+    while(walk != NULL && walk->data != key)
+    {
+        prev = walk;
+        walk = walk->next;
+    }
+
+    prev->next = walk->next;
+}
+
+void remove_list_index(struct Node **head_ref, int index)
+{
+    struct Node *prev, *walk;
+    walk = *head_ref;
+
+    if(index == 0 && index < count(walk))
+    {
+        *head_ref = walk->next;
+        return;
+    }
+    //if using 1 based indexing, then decrement index once before while loop
+    index--;
+    while(index--)
+    {
+        prev = walk;
+        walk = walk->next;
+    }
+
+    prev->next = walk->next;
+
+}
+
+int is_sorted(struct Node *p)
+{
+    int x = INT_MIN;
+    while(p != NULL)
+    {
+        if(p->data < x)
+            return 0;
+        x=p->data;
+        p=p->next;
+    }
+    return 1;
+}
+
+void remove_duplicated(struct Node **head_ref)
+{
+    struct Node *prev, *first;
+    prev = *head_ref;
+    first = (*head_ref)->next;
+
+    while(first != NULL)
+    {
+        if(prev->data != first->data)
+        {
+            prev = first;
+            first = first->next;
+        }
+        else
+        {
+            prev->next = first->next;
+            first = prev->next;
+        }
+    }
+}
+void main()
 {
     int A[] = {1, 2, 3, 4};
-    create(A, 4);
-    insert_sorted(&first, 10);
-    insert_sorted(&first, 6);
-    insert_sorted(&first, 11);
-    insert_sorted(&first, 7);
-    display(first); 
+    int sort;
+    head = first;
+    create(&head, A, 4);
+    insert_sorted(&head, 10);
+    insert_sorted(&head, 4);
+    printf("Created List and Inserted 10\n");
+    printf("\n");
 
-    int count_test = count_rec(first);
-    printf("Count test %d\n", count_test);
-    // insert_index(&first, 3, 7);
-    // insert_index(&first, 6, 99);
-    // insert_index(&first, 0, 69);
-    insert_sorted(&first, 5);
-    insert_sorted(&first, 5);
-    display(first);
-
-    // int del = delete(&first, 7);
-    // printf("Delete Status = %d\n", del);
-    // deleteNode(&first, 1);
-    int del = deleteIndex(&first, 2);
-    printf("Delete status = %d\n", del);
-    display(first);
-    return 0;
+    // remove_list_entry(&head, 3);
+    sort = is_sorted(head);
+    printf("Is sorted? : %d\n", sort);
+    display(head);
+    remove_duplicated(&head);
+    display(head);
+  
 }
