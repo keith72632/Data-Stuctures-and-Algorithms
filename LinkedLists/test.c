@@ -280,6 +280,62 @@ void remove_duplicated(struct Node **head_ref)
         }
     }
 }
+
+//Time O(N) and needs space for array
+void reverse_list(struct Node **head_ref)
+{
+    struct Node *p;
+    p = *head_ref;
+    int n = count_rec(p);
+    int *data = (int *)malloc(sizeof(int) * count(p));
+    size_t i = 0;
+
+    while(p != NULL)
+    {
+        data[i] = p->data;
+        p = p->next;
+        i++;
+    }
+    //reset temp pointer at beginning of head
+    p = *head_ref;
+    while(i--)
+    {
+        p->data = data[i];
+        p = p->next;
+    }
+}
+
+//Sliding Pointers
+void reverse_sliding(struct Node **head_ref)
+{
+    struct Node *p, *q, *r;
+    p = *head_ref;
+    q = NULL;
+    r = NULL;
+
+    while(p != NULL)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    //set head to q, because this algorithm runs backwards until p is NULL, which makes q the first node.
+    *head_ref = q;
+}
+
+void reverse_recursion(struct Node **head_ref, struct Node *q)
+{
+    struct Node *p;
+    p = *head_ref;
+
+    if(p)
+    {
+        reverse_recursion(head_ref, p->next);
+    }
+    else 
+        *head_ref = q;
+}
 void main()
 {
     int A[] = {1, 2, 3, 4};
@@ -289,13 +345,19 @@ void main()
     insert_sorted(&head, 10);
     insert_sorted(&head, 4);
     printf("Created List and Inserted 10\n");
-    printf("\n");
 
     // remove_list_entry(&head, 3);
-    sort = is_sorted(head);
-    printf("Is sorted? : %d\n", sort);
+
     display(head);
+    printf("\nRemoved duplicates\n");
     remove_duplicated(&head);
     display(head);
+
+    printf("\nReversed List\n");
+    reverse_sliding(&head);
+    display(head);
+
+    sort = is_sorted(head);
+    printf("\nIs sorted? : %d\n", sort);
   
 }
