@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define PRINT_NL()(printf("\n"))
+
 struct Node
 {
     int data;
@@ -35,6 +37,7 @@ void display(struct Node *p)
         printf("%d\n", p->data);
         display(p->next);
     }
+
 }
 
 int count(struct Node *p)
@@ -336,6 +339,45 @@ void reverse_recursion(struct Node **head_ref, struct Node *q)
     else 
         *head_ref = q;
 }
+
+void append(struct Node **head_ref, int data)
+{
+    struct Node *p, *temp;
+    p = *head_ref;
+
+    temp = (struct Node*)malloc(sizeof(struct Node));
+    
+    if(p != NULL)
+    {
+        temp->data = data;
+        temp->next = NULL;
+        while(p->next != NULL)
+            p = p->next;
+        p->next = temp;
+    }
+}
+
+struct Node *trim(struct Node **head_ref)
+{
+    struct Node *p, *temp;
+    p = *head_ref;
+    temp = (struct Node*)malloc(sizeof(struct Node));
+
+    if(p != NULL)
+    {
+        //find last node
+        while(p->next != NULL)
+        {
+            temp = p;
+            p = p->next;
+        }
+        //delete popped node
+        temp->next = p->next;
+        //return popped node
+        return p;
+    }
+}
+
 void main()
 {
     int A[] = {1, 2, 3, 4};
@@ -345,19 +387,44 @@ void main()
     insert_sorted(&head, 10);
     insert_sorted(&head, 4);
     printf("Created List and Inserted 10\n");
-
-    // remove_list_entry(&head, 3);
-
     display(head);
-    printf("\nRemoved duplicates\n");
+    PRINT_NL();
+
+    printf("Removed duplicates\n");
     remove_duplicated(&head);
     display(head);
+    PRINT_NL();
 
-    printf("\nReversed List\n");
+    printf("Reversed List\n");
     reverse_sliding(&head);
     display(head);
+    PRINT_NL();
+
+    printf("Append to end of list\n");
+    append(&head, 12);
+    display(head);
+    PRINT_NL();
+
+    printf("Pop function\n");
+    struct Node *temp; 
+    temp = trim(&head);
+    printf("First Popped data: %d\n", temp->data);
+    PRINT_NL();
+
+    temp = trim(&head);
+    printf("Second Popped Data: %d\n", temp->data);
+    PRINT_NL();
+
+    temp = trim(&head);
+    printf("Third Popped Data: %d\n", temp->data);
+    PRINT_NL();
+
+    printf("Remaining Nodes\n");
+    display(head);
+    PRINT_NL();
 
     sort = is_sorted(head);
     printf("\nIs sorted? : %d\n", sort);
+
   
 }
