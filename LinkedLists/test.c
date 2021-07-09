@@ -378,6 +378,23 @@ struct Node *trim(struct Node **head_ref)
     }
 }
 
+void push(struct Node **head_ref, struct Node *p)
+{
+
+    p->next = *head_ref;
+    *head_ref = p;
+}
+
+struct Node *pop(struct Node **head_ref)
+{
+    struct Node *node, *walk;
+    node = *head_ref;
+    walk = *head_ref;
+    *head_ref = (*head_ref)->next;
+    walk->next = (*head_ref)->next;
+    return node;
+}
+
 void main()
 {
     int A[] = {1, 2, 3, 4};
@@ -390,36 +407,52 @@ void main()
     display(head);
     PRINT_NL();
 
-    printf("Removed duplicates\n");
-    remove_duplicated(&head);
-    display(head);
-    PRINT_NL();
+    // printf("Removed duplicates\n");
+    // remove_duplicated(&head);
+    // display(head);
+    // PRINT_NL();
 
-    printf("Reversed List\n");
-    reverse_sliding(&head);
-    display(head);
-    PRINT_NL();
+    // printf("Reversed List\n");
+    // reverse_sliding(&head);
+    // display(head);
+    // PRINT_NL();
 
-    printf("Append to end of list\n");
-    append(&head, 12);
-    display(head);
-    PRINT_NL();
+    // printf("Append to end of list\n");
+    // append(&head, 12);
+    // display(head);
+    // PRINT_NL();
 
-    printf("Pop function\n");
+    // printf("Trim function\n");
     struct Node *temp; 
-    temp = trim(&head);
-    printf("First Popped data: %d\n", temp->data);
+    // temp = trim(&head);
+    // printf("First Trimmed data: %d\n", temp->data);
+    // PRINT_NL();
+
+    // temp = trim(&head);
+    // printf("Second Trimmed Data: %d\n", temp->data);
+    // PRINT_NL();
+
+    // temp = trim(&head);
+    // printf("Third Trimmed Data: %d\n", temp->data);
+    // PRINT_NL();
+
+    // printf("Remaining Nodes\n");
+    // display(head);
+    // PRINT_NL();
+
+    printf("Popping Node\n");
+
+    struct Node *new = (struct Node*)malloc(sizeof(struct Node));
+    new->data = 69;
+    new->next = head;
+
+    temp = pop(&head);
+    printf("Temp Popped data: %d\n", temp->data);
+    display(head);
     PRINT_NL();
 
-    temp = trim(&head);
-    printf("Second Popped Data: %d\n", temp->data);
-    PRINT_NL();
-
-    temp = trim(&head);
-    printf("Third Popped Data: %d\n", temp->data);
-    PRINT_NL();
-
-    printf("Remaining Nodes\n");
+    printf("Pushing Node With data: %d\n", temp->data);
+    push(&head, temp);
     display(head);
     PRINT_NL();
 
