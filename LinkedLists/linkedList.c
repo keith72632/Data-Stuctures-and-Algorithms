@@ -10,7 +10,9 @@ struct Node
 };
 
 struct Node *first;
+struct Node *second;
 struct Node *head;
+struct Node *head2;
 
 void create(struct Node **head_ref, int arr[], int len)
 {
@@ -357,7 +359,7 @@ void append(struct Node **head_ref, int data)
     }
 }
 
-struct Node *trim(struct Node **head_ref)
+struct Node *top(struct Node **head_ref)
 {
     struct Node *p, *temp;
     p = *head_ref;
@@ -395,17 +397,57 @@ struct Node *pop(struct Node **head_ref)
     return node;
 }
 
+struct Node *mergeTwoLists(struct Node *l1, struct Node *l2)
+{
+    struct Node head;
+    struct Node *p = &head;
+    
+    if (l1 == NULL && l2 == NULL)
+        return NULL;
+    
+    //walk through both lists until onen is null
+    while (l1 && l2) {
+        if (l1->data < l2->data) {
+            p->next = l1;
+            l1 = l1->next;
+            p = p->next;
+        } else {
+            p->next = l2;
+            l2 = l2->next;
+            p = p->next;
+        }
+    }
+    
+    //see if there are any remaining nodes for l1 or l2. add to list
+    if (l1) {
+        p->next = l1;
+    }
+
+    if (l2) {
+        p->next = l2;
+    }
+  
+    return head.next;
+}
+
 void main()
 {
     int A[] = {1, 2, 3, 4};
+    int B[] = {7, 4, 9, 3};
     int sort;
     head = first;
+    head2 = second;
     create(&head, A, 4);
+    create(&head2, B, 4);
     insert_sorted(&head, 10);
     insert_sorted(&head, 4);
-    printf("Created List and Inserted 10\n");
+    printf("Created first List and Inserted 10\n");
     display(head);
     PRINT_NL();
+    printf("Created Second List\n");
+    display(head2);
+    PRINT_NL();
+
 
     // printf("Removed duplicates\n");
     // remove_duplicated(&head);
