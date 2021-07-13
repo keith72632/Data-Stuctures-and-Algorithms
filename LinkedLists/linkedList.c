@@ -11,8 +11,10 @@ struct Node
 
 struct Node *first;
 struct Node *second;
+struct Node *third;
 struct Node *head;
 struct Node *head2;
+struct Node *head3;
 
 void create(struct Node **head_ref, int arr[], int len)
 {
@@ -397,6 +399,7 @@ struct Node *pop(struct Node **head_ref)
     return node;
 }
 
+//leetCode
 struct Node *mergeTwoLists(struct Node *l1, struct Node *l2)
 {
     struct Node head;
@@ -430,6 +433,60 @@ struct Node *mergeTwoLists(struct Node *l1, struct Node *l2)
     return head.next;
 }
 
+void mergeLists(struct Node **head1, struct Node **head2, struct Node **head3)
+{
+    struct Node *h1, *h2, *h3, *last;
+    h1 = *head1;
+    h2 = *head2;
+    last = *head3;
+
+    if(h1->data < h2->data)
+    {
+        third = last = h1;
+        h1 = h1->next;
+        third->next = NULL;
+    }
+    else
+    {
+        third = last = h2;
+        h2 = h2->next;
+        third->next = NULL;
+    }
+
+    while(h1 && h2)
+    {
+        if(h1->data < h2->data)
+        {
+            last->next = h1;
+            last = h1;
+            h1 = h1->next;
+            last->next = NULL;
+        }
+        else
+        {
+            last->next = h2;
+            last = h2;
+            h2 = h2->next;
+            last->next = NULL;           
+        }
+    }
+    if(h1)last->next = h1;
+    if(h2)last->next = h2;
+}
+
+void *cat(struct Node **l1, struct Node **l2)
+{
+    struct Node *q, *p;
+    p = *l1; 
+    q = *l2;
+    
+    while(p->next != NULL)
+    {
+        p = p->next;
+    }
+    p->next = q;
+}
+
 void main()
 {
     int A[] = {1, 2, 3, 4};
@@ -437,17 +494,26 @@ void main()
     int sort;
     head = first;
     head2 = second;
+    head3 = third;
     create(&head, A, 4);
     create(&head2, B, 4);
     insert_sorted(&head, 10);
     insert_sorted(&head, 4);
-    printf("Created first List and Inserted 10\n");
+    printf("Created first List and Inserted 10:\n");
     display(head);
     PRINT_NL();
-    printf("Created Second List\n");
+    printf("Created Second List:\n");
     display(head2);
     PRINT_NL();
 
+    cat(&head, &head2);
+    printf("Concatonated two lists:\n");
+    display(head);
+    PRINT_NL();
+
+    mergeLists(&head, &head2, &head3);
+    printf("Two lists merged:\n");
+    display(head3);
 
     // printf("Removed duplicates\n");
     // remove_duplicated(&head);
@@ -482,24 +548,24 @@ void main()
     // display(head);
     // PRINT_NL();
 
-    printf("Popping Node\n");
+    // printf("Popping Node\n");
 
-    struct Node *new = (struct Node*)malloc(sizeof(struct Node));
-    new->data = 69;
-    new->next = head;
+    // struct Node *new = (struct Node*)malloc(sizeof(struct Node));
+    // new->data = 69;
+    // new->next = head;
 
-    temp = pop(&head);
-    printf("Temp Popped data: %d\n", temp->data);
-    display(head);
-    PRINT_NL();
+    // temp = pop(&head);
+    // printf("Temp Popped data: %d\n", temp->data);
+    // display(head);
+    // PRINT_NL();
 
-    printf("Pushing Node With data: %d\n", temp->data);
-    push(&head, temp);
-    display(head);
-    PRINT_NL();
+    // printf("Pushing Node With data: %d\n", temp->data);
+    // push(&head, temp);
+    // display(head);
+    // PRINT_NL();
 
-    sort = is_sorted(head);
-    printf("\nIs sorted? : %d\n", sort);
+    // sort = is_sorted(head);
+    // printf("\nIs sorted? : %d\n", sort);
 
   
 }
