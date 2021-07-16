@@ -1,3 +1,25 @@
+Recursion
+
+    Recursion is a a method where the solution to a problems depends on soutions to smaller instances of the same problem. Recursive
+functions will call themselves until a base condition is met. 
+
 Steps to solving problems with recursion
 1. Divide into smaller problems
 2. Specify base condition to stop recursive function
+
+count_down(n)
+{
+    printf(n);
+    count_down(n - 1);
+}
+
+    When in a recursive function, if function is called before action is taken, it "reverses" the function. Ex:
+ 
+count_up(n)
+{
+    count_up(n - 1);
+    printf(n);
+}
+
+    This behavior is categorized as calling and returning phase. If you call first, then "return" backwards through the function, 
+this will perform actions in reverse. Also refered to as ascedning and descending. 
